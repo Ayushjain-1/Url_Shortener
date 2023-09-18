@@ -40,7 +40,7 @@ def home():
         if url_entry:
             return render_template("result.html", short_url=url_entry.short_url)
 
-        # Generate a new short URL
+        # Generate a new short URLS
         short_url = generate_short_url()
 
         # Create a new database entry
@@ -61,5 +61,5 @@ def redirect_to_long_url(short_url):
         return "URL not found."
 
 if __name__ == '__main__':
-    create_tables()  # Call the create_tables function
+    create_tables()  
     app.run(port=5000, debug=True)

@@ -4,10 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>URL Shortener Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>URL Shortener Result</h1>
-    <p>Your short URL:</p>
-    <a href="{{ short_url }}" target="_blank">{{ short_url }}</a>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const copyButton = document.getElementById("copy-button");
+            const shortenedLink = document.getElementById("shortened-link");
+    
+            copyButton.addEventListener("click", function () {
+                
+                const tempInput = document.createElement("input");
+                tempInput.value = shortenedLink.href;
+                document.body.appendChild(tempInput);
+    
+                tempInput.select();
+                tempInput.setSelectionRange(0, 99999); // For mobile devices
+    
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+    
+                copyButton.textContent = "Copied!";
+            });
+        });
+    </script>
+    
+    <main>
+        <section class="short-url">
+            <h2>Shortened URL</h2>
+            <p>Your shortened URL:</p>
+            <div class="short-url-container">
+                <a href="{{ short_url }}" id="shortened-link" target="_blank">{{ short_url }}</a>
+                <button id="copy-button">Copy</button>
+            </div>
+        </section>
+        
+    </main>
+    <footer>
+        <p>&copy; 2023 Your URL Shortener</p>
+    </footer>
 </body>
 </html>
